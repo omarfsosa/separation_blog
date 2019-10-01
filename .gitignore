@@ -1,0 +1,4 @@
+__pycache__/
+.ipynb_checkpoints/
+blog.html
+.DS_Store
