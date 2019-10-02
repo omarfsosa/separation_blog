@@ -21,10 +21,7 @@ class SeparatedClassifier:
             y_true_g = self.y_train[self.A_train == g]
             R_g = self.R_train[self.A_train == g]
             self.randomized_thresholds[g] = self._find_thresholds_and_probas(
-                y_true_g,
-                R_g,
-                goal_fpr,
-                goal_tpr,
+                y_true_g, R_g, goal_fpr, goal_tpr
             )
 
     def fair_predict(self, R_test, A_test):
@@ -32,7 +29,7 @@ class SeparatedClassifier:
         y_pred = []
         for r, g in zip(R_test, A_test):
             *a, p = self.randomized_thresholds[g]
-            t = np.random.choice(a, p=[1 - p , p])
+            t = np.random.choice(a, p=[1 - p, p])
             y_pred.append(1 if r >= t else 0)
 
         return np.array(y_pred)
@@ -48,12 +45,9 @@ class SeparatedClassifier:
             y = tpr[i] + p * (tpr[j] - tpr[i])
             return np.hypot(x - goal_fpr, y - goal_tpr)
 
-        initial_guess = np.array([0.3, 0.5, .5])
+        initial_guess = np.array([0.3, 0.5, 0.5])
         res = minimize(
-            distance,
-            initial_guess,
-            method='nelder-mead',
-            options={'xtol': 1e-10},
+            distance, initial_guess, method="nelder-mead", options={"xtol": 1e-10}
         )
         t0, t1, p = res["x"]
         return t0, t1, p

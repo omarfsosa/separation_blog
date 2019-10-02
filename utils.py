@@ -16,6 +16,7 @@ def check_lengths(*arrays):
         message = "Input arrays should all be the same length."
         raise ValueError(message)
 
+
 def check_binaries(*arrays):
     """
     Check that all values in the arrays are 0s or 1s.
@@ -53,6 +54,7 @@ def tp_rate(y_true, y_pred) -> float:
 
     rate = (y_true @ y_pred) / (y_true @ y_true)
     return rate
+
 
 def fp_rate(y_true, y_pred) -> float:
     """

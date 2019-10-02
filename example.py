@@ -11,17 +11,13 @@ url = "https://raw.githubusercontent.com/omarfsosa/datasets/master/fairness_synt
 df = pd.read_csv(url)
 
 X_train, X_test, y_train, y_test, A_train, A_test = train_test_split(
-    df.drop(columns="y"),
-    df["y"],
-    df["A"],  # (2)
-    test_size=.6,  # (3)
-    random_state=42,
+    df.drop(columns="y"), df["y"], df["A"], test_size=0.6, random_state=42
 )
 
 clf = LogisticRegression(solver="lbfgs")
 clf.fit(X_train, y_train)
 y_pred = clf.predict(X_test)
-print(classification_report(y_test, y_pred, A_test))  # (4)
+print(classification_report(y_test, y_pred, A_test))
 
 R_train = clf.predict_proba(X_train)[:, 1]
 R_test = clf.predict_proba(X_test)[:, 1]
