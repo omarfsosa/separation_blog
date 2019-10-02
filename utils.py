@@ -8,7 +8,7 @@ def check_lengths(*arrays):
     Parameters
     ----------
     *arrays : list or tuple of input objects.
-        Objects that will be checked for consistent length.
+        Objects that will be checked.
     """
     lengths = [len(X) for X in arrays if X is not None]
     uniques = np.unique(lengths)
@@ -23,7 +23,7 @@ def check_binaries(*arrays):
     Parameters
     ----------
     *arrays : list or tuple of input objects.
-        Objects that will be checked for consistent length.
+        Objects that will be checked.
     """
     values = [set(X) for X in arrays if X is not None]
     all_valid = all(v.issubset({0, 1}) for v in values)
@@ -92,10 +92,6 @@ def classification_report(y_true, y_pred, A) -> str:
 
     A: 1d array like
         Labels for the different groups.
-
-    Returns
-    -------
-    report: str
     """
     check_lengths(y_true, y_pred, A)
     check_binaries(y_true, y_pred)
