@@ -1,6 +1,5 @@
 from scipy.optimize import minimize
-from sklearn.metrics import roc_curve, recall_score
-import pandas as pd
+from sklearn.metrics import roc_curve
 import numpy as np
 
 from utils import check_lengths, check_binaries
