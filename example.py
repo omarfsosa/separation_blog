@@ -1,6 +1,5 @@
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
-import numpy as np
 import pandas as pd
 
 # utils.py and separation_mvp.py are in the repo
